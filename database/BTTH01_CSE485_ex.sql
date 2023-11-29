@@ -29,3 +29,6 @@ WHERE ten_bhat like N'%Yêu%' OR ten_bhat LIKE N'%thương%' OR ten_bhat LIKE N'
 “yêu”, “thương”, “anh”, “em” (2 đ)*/
 SELECT * FROM baiviet 
 WHERE ten_bhat like N'%Yêu%' OR ten_bhat LIKE N'%thương%' OR ten_bhat LIKE N'%anh%' OR ten_bhat LIKE N'%em%' OR tieude like N'%Yêu%' OR tieude LIKE N'%thương%' OR tieude LIKE N'%anh%' OR tieude LIKE N'%em%';
+/*l. Bổ sung thêm bảng Users để lưu thông tin Tài khoản đăng nhập và sử dụng cho chức năng
+Đăng nhập/Quản trị trang web. (5 đ)*/
+create table users(UserName varchar(100), Password varchar(100))
