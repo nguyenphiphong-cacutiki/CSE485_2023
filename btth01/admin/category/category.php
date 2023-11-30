@@ -57,10 +57,10 @@ try{
                         <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link" href="../author/author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="../article/article.php">Bài viết</a>
                     </li>
                 </ul>
                 </div>
@@ -91,7 +91,7 @@ try{
                                 <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
+                                <a href="delete_category.php?id=<?=$categorys[0]?>" onclick="return confirm('Bạn có muốn xóa không?')" ><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
