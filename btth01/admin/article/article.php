@@ -92,10 +92,10 @@ try{
                                 <a href="show_article.php?id=1"><i class="fa-regular fa-eye"></i></a>
                             </td>
                             <td>
-                                <a href="edit_article.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="edit_article.php?id=<?=$articles[0]?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                            <a href="#" onclick="confirmDelete(1)"><i class="fa-solid fa-trash"></i></a>
+                                <a href="#" onclick="confirmDelete(this)"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach;?>
@@ -113,11 +113,14 @@ try{
 </body>
 </html>
 <script>
-    function confirmDelete(articleId) {
+    function confirmDelete(element) {
+        var row = element.closest("tr");  // Tìm hàng chứa nút xóa
+        var articleId = row.querySelector("th").innerText;  // Lấy giá trị từ ô số hàng
+
         var result = confirm("Xác nhận xóa?");
-        // if (result) {
-        //     // If the user confirms, redirect to the PHP script that handles the deletion
-        //     window.location.href = "delete_article.php?id=" + articleId;
-        // }
+        if (result) {
+            // Nếu người dùng xác nhận, chuyển hướng đến kịch bản PHP xử lý xóa
+            window.location.href = "delete_article.php?id=" + articleId;
+        }
     }
 </script>
