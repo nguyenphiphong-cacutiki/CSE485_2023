@@ -46,47 +46,55 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_article.php" class="btn btn-success">Thêm mới</a>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên bài viết</th>
-                            <th>Chi tiết</th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Bài viết số 13</td>
-                            <td>
-                                <a href="show_article.php?id=1"><i class="fa-regular fa-eye"></i></a>
-                            </td>
-                            <td>
-                                <a href="edit_article.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                            <a href="#" onclick="confirmDelete(1)"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Bài viết số 13</td>
-                            <td>
-                                <a href="show_article.php?id=1"><i class="fa-regular fa-eye"></i></a>
-                            </td>
-                            <td>
-                                <a href="edit_article.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                            <a href="#" onclick="confirmDelete(1)"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
+                <h3 class="text-center text-uppercase fw-bold">THÊM MỚI BÀI VIẾT</h3>
+                <form action="process_add_category.php" method="post">
+                <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Mã bài viết</span>
+                        <input type="text" class="form-control" name="txtCatId">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Tiêu đề</span>
+                        <input type="text" class="form-control" name="txtCatId">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Tên bài hát</span>
+                        <input type="text" class="form-control" name="txtCatName">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Mã thể loại</span>
+                        <input type="text" class="form-control" name="txtCatName">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Tóm tắt</span>
+                        <input type="text" class="form-control" name="txtCatName">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Nội dung</span>
+                        <input type="text" class="form-control" name="txtCatName">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Mã tác giả</span>
+                        <input type="text" class="form-control" name="txtCatName">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Ngày viết</span>
+                        <input type="text" class="form-control" name="txtCatName">
+                    </div>
+
+                    <div class="form-group  float-end ">
+                        <input type="submit" value="Thêm" class="btn btn-success">
+                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
+                    </div>
+
+                    
+                </form>
             </div>
         </div>
     </main>
@@ -96,12 +104,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
-<script>
-    function confirmDelete(articleId) {
-        var result = confirm("Xác nhận xóa?");
-        // if (result) {
-        //     // If the user confirms, redirect to the PHP script that handles the deletion
-        //     window.location.href = "delete_article.php?id=" + articleId;
-        // }
-    }
-</script>
