@@ -1,31 +1,27 @@
-<?php
-$host = 'localhost';
-$db = 'btth01_cse485';
-$user = 'root';
-$pass = '';
-//Buoc 1: Connect DB server
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
-?>
-<?php
-    function getAuthor_Code() {
-        global $conn;
-        $result = $conn->query("SELECT ma_tgia FROM tacgia");
-        $row = $result->fetch();
-        $ma_tgia = $row['ma_tgia'];
-        return $ma_tgia;
-    }
+<?php 
+// buoc 1: ket noi DB Server
 
-    function getAuthor_Name() {
-        global $conn;
-        $result = $conn->query("SELECT ten_tgia FROM tacgia");
-        $row = $result->fetch();
-        $ten_tgia = $row['ten_tgia'];
-        return $ten_tgia;
-    }
+try{
+    $host = "localhost";
+    $dbname = "btth01_cse485";
+    $user = "root";
+    $pass = "";
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+
+     // query
+     $sql = "SELECT * from tacgia";
+     $pst = $conn->prepare($sql);
+     $pst->execute();
+     // buoc 3: xử ý kết quả try vấn
+     $authors = $pst->fetchAll();
+    //  echo '<pre>';
+    //      print_r ($authors);
+    //  echo '</pre>';
+ 
+   
+}catch(PDOException $e){
+    echo 'Error: '. $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -95,19 +91,18 @@ try {
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($authors as $authors):?>
                         <tr>
                             <th scope="row">
-                                <!-- <?= getAuthor_Code()?>  -->
-                                1
+                                <?=$authors[0]?>
                             </th>
 
                             <td>
-                                <!-- <?= getAuthor_Name()?>  -->
-                                John Smith
+                                <?=$authors[1]?>
                             </td>
 
                             <td>
-                                <img src="../images/authors_img/author_1.png" alt="" width="40px" height="40px">
+                                <img src="../../images/logo.png" alt="" width="40px" height="40px">
                             </td>
 
                             <td>
@@ -117,25 +112,8 @@ try {
                                 <a href=""><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">
-                                <!-- <?= getAuthor_Code()?> -->
-                                2
-                            </th>
-                            <td>
-                                <!-- <?= getAuthor_Name()?>  -->
-                                Leo Mink
-                            </td>
-                            <td>
-                                <img src="../images/authors_img/author_1.png" alt="" width="40px" height="40px">
-                            </td>
-                            <td>
-                                <a href="edit_author.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        <?php endforeach;?>
+                        
 
 
                     </tbody>

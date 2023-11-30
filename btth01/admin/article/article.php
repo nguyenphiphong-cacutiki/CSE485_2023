@@ -1,3 +1,29 @@
+
+<?php 
+// buoc 1: ket noi DB Server
+
+try{
+    $host = "localhost";
+    $dbname = "btth01_cse485";
+    $user = "root";
+    $pass = "";
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+
+     // query
+     $sql = "SELECT ma_bviet, ten_bhat from baiviet";
+     $pst = $conn->prepare($sql);
+     $pst->execute();
+     // buoc 3: xử ý kết quả try vấn
+     $articles = $pst->fetchAll();
+    //  echo '<pre>';
+    //      print_r ($articles);
+    //  echo '</pre>';
+ 
+   
+}catch(PDOException $e){
+    echo 'Error: '. $e->getMessage();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,9 +84,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($articles as $articles): ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Bài viết số 13</td>
+                            <th scope="row"><?=$articles[0]?></th>
+                            <td><?=$articles[1]?></td>
                             <td>
                                 <a href="show_article.php?id=1"><i class="fa-regular fa-eye"></i></a>
                             </td>
@@ -71,19 +98,8 @@
                             <a href="#" onclick="confirmDelete(1)"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Bài viết số 13</td>
-                            <td>
-                                <a href="show_article.php?id=1"><i class="fa-regular fa-eye"></i></a>
-                            </td>
-                            <td>
-                                <a href="edit_article.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                            <a href="#" onclick="confirmDelete(1)"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        <?php endforeach;?>
+                       
                        
                     </tbody>
                 </table>

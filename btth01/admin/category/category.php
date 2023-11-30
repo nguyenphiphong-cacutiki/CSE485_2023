@@ -1,3 +1,29 @@
+<?php 
+// buoc 1: ket noi DB Server
+
+try{
+    $host = "localhost";
+    $dbname = "btth01_cse485";
+    $user = "root";
+    $pass = "";
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+
+     // query
+     $sql = "SELECT * from theloai";
+     $pst = $conn->prepare($sql);
+     $pst->execute();
+     // buoc 3: xử ý kết quả try vấn
+     $categorys = $pst->fetchAll();
+    //  echo '<pre>';
+    //      print_r ($categorys);
+    //  echo '</pre>';
+ 
+   
+}catch(PDOException $e){
+    echo 'Error: '. $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,9 +83,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($categorys as $categorys): ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
+                            <th scope="row"><?=$categorys[0]?></th>
+                            <td><?=$categorys[1]?></td>
                             <td>
                                 <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
@@ -67,16 +94,8 @@
                                 <a href=""><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        <?php endforeach; ?>
+                        
                        
                     </tbody>
                 </table>
