@@ -1,27 +1,20 @@
-<?php 
-// buoc 1: ket noi DB Server
-
-try{
-    $host = "localhost";
-    $dbname = "btth01_cse485";
-    $user = "root";
-    $pass = "";
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-
-     // query
-     $sql = "SELECT * from tacgia";
-     $pst = $conn->prepare($sql);
-     $pst->execute();
-     // buoc 3: xử ý kết quả try vấn
-     $authors = $pst->fetchAll();
-    //  echo '<pre>';
-    //      print_r ($authors);
-    //  echo '</pre>';
- 
-   
-}catch(PDOException $e){
-    echo 'Error: '. $e->getMessage();
+<?php
+$host = 'localhost';
+$db = 'btth01_cse485';
+$user = 'root';
+$pass = '';
+//Buoc 1: Connect DB server
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+} catch (PDOException $e) {
+    echo $e->getMessage();
 }
+?>
+
+<?php
+
+$result = $conn->query("SELECT * FROM tacgia");
+$authors = $result->fetchALL();
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +72,7 @@ try{
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_author.php" class="btn btn-success">Thêm mới</a>
+                <a href="../author/add_author.php" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -93,28 +86,22 @@ try{
                     <tbody>
                         <?php foreach($authors as $authors):?>
                         <tr>
-                            <th scope="row">
-                                <?=$authors[0]?>
-                            </th>
+                            <th scope="row"> <?=$authors[0]?> </th>
 
-                            <td>
-                                <?=$authors[1]?>
+                            <td> <?=$authors[1]?> </td>
+
+                            <td style="padding-left: 30px;">
+                                <img src="../../images/authors_img/author_<?=$authors[0]?>.png" alt="" width="40px" height="40px">
                             </td>
 
                             <td>
-                                <img src="../../images/logo.png" alt="" width="40px" height="40px">
-                            </td>
-
-                            <td>
-                                <a href="edit_author.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="edit_author.php?id=<?=$authors[0]?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
+                            <a href="eraseAuthor.php?id=<?=$authors[0]?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        <?php endforeach;?>
-                        
-
+                        <?php endforeach; ?>
 
                     </tbody>
                 </table>
