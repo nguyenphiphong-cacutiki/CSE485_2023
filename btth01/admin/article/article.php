@@ -95,7 +95,7 @@ try{
                                 <a href="edit_article.php?id=<?=$articles[0]?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                            <a href="delete_article.php?id=<?=$articles[0]?>" onclick="return confirm('Bạn có muốn xóa không')"><i class="fa-solid fa-trash"></i></a>
+                                <a href="#" onclick="confirmDelete(this)"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach;?>
@@ -112,23 +112,15 @@ try{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
-<?php 
-    function showConfirmation($idArticle) {
-        global $conn;
+<script>
+    function confirmDelete(element) {
+        var row = element.closest("tr");  // Tìm hàng chứa nút xóa
+        var articleId = row.querySelector("th").innerText;  // Lấy giá trị từ ô số hàng
 
-        try{
-            $sqlDelete = "delete from article where ma_bviet = :ma_bviet";
-            $pstDelete = $conn->prepare($sqlDelete);
-            $pstDelete->bindParam(':ma_bviet', $idArticle);
-            $pstDelete->execute();  
-
-            echo '<script>alert("Xóa tác giả thành công!"); window.location.href = "author.php";</script>';
-        }catch(Exception $e){
-            echo "Lỗi xóa: {$e->getMessage()}";
+        var result = confirm("Xác nhận xóa?");
+        if (result) {
+            // Nếu người dùng xác nhận, chuyển hướng đến kịch bản PHP xử lý xóa
+            window.location.href = "delete_article.php?id=" + articleId;
         }
-
-        
-        
     }
-?>
-
+</script>
